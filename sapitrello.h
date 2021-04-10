@@ -6,23 +6,23 @@
 #define PROJEKT_1_SAPITRELLO_H
 
 
-typedef struct User{
+typedef struct User {
 
     int id;
 
     char name[50];
 
-}User;
-typedef struct Card{
+} User;
+typedef struct Card {
     char title[50];
     char desc[200];
     User assignedUser;
     int status;
     int userHistoryListSize;
-    User userHistoryList[];
+    User *userHistoryList;
 
-}Card;
-typedef struct Board{
+} Card;
+typedef struct Board {
     int userListSize;
     int cardListSize;
     char name[50];
@@ -30,23 +30,61 @@ typedef struct Board{
     User userList[];
 
 
-}Board;
-/*typedef struct SapiTrello{
+} Board;
 
-    User user[];
+typedef struct SapiTrello {
+    int boardListSize;
+    int userListSize;
+    int cardListSize;
+    User *userList;
+    Board *boardList;
+    Card *cardList;
 
-}SapiTrello;
-*/
+} SapiTrello;
 
+SapiTrello *CreateSapiTrello();
+
+Board *CreateBoard();
 
 User *CreateUser();
-Board *CreateBoard();
-void AddUser(Board *board, User *user );
-void PrintBoard( Board *board);
-void PrintUser( User *user);
+
 Card *CreateCard();
+
+void AddUser(Board *board, User *user);
+
 void AddCard(Board *board, Card *card);
-void PrintCard( Card *card);
-void AddUserToCard(Card *card,User *user);
-void printAllCardsinBoard(Board *board);
+
+void AddUserToCard(Card *card, User *user);
+
+void PrintBoard(Board *board);
+
+void PrintUser(User *user);
+
+void PrintCard(Card *card);
+
+void printAllCardsInBoard(Board *board);
+
+
+void getAnyStatusCard(Board *board);
+
+void getStatusOfCardByTitle(Board *board);
+
+void getUserHistoryOfCardByTitle(Board *board);
+
+void setCardStatusByCardTitle(Board *board);
+
+void stCreateBoard(SapiTrello *sapiTrello);
+
+void stCreateCard(SapiTrello *sapiTrello);
+
+void stCreateUser(SapiTrello *sapiTrello);
+
+void getBoards(SapiTrello *sapiTrello);
+
+void getUsers(SapiTrello *sapiTrello);
+
+void getCards(SapiTrello *sapiTrello);
+void stAddUserToBoard(SapiTrello *sapiTrello);
+void PrintMenu();
+
 #endif //PROJEKT_1_SAPITRELLO_H
