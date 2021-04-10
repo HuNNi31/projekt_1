@@ -14,17 +14,20 @@ typedef struct User{
 
 }User;
 typedef struct Card{
-    char title;
-    char desc;
-    int assignedUserId;
+    char title[50];
+    char desc[200];
+    User assignedUser;
     int status;
+    int userHistoryListSize;
+    User userHistoryList[];
 
 }Card;
 typedef struct Board{
     int userListSize;
+    int cardListSize;
     char name[50];
+    Card *cardList;
     User userList[];
-
 
 
 }Board;
@@ -42,6 +45,8 @@ void AddUser(Board *board, User *user );
 void PrintBoard( Board *board);
 void PrintUser( User *user);
 Card *CreateCard();
-void AddCard();
+void AddCard(Board *board, Card *card);
 void PrintCard( Card *card);
+void AddUserToCard(Card *card,User *user);
+void printAllCardsinBoard(Board *board);
 #endif //PROJEKT_1_SAPITRELLO_H
