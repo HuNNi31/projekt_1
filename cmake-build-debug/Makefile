@@ -154,6 +154,33 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_1.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_1.dir\main.c.s
 .PHONY : main.c.s
 
+sapitrello.obj: sapitrello.c.obj
+
+.PHONY : sapitrello.obj
+
+# target to build an object file
+sapitrello.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_1.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_1.dir\sapitrello.c.obj
+.PHONY : sapitrello.c.obj
+
+sapitrello.i: sapitrello.c.i
+
+.PHONY : sapitrello.i
+
+# target to preprocess a source file
+sapitrello.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_1.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_1.dir\sapitrello.c.i
+.PHONY : sapitrello.c.i
+
+sapitrello.s: sapitrello.c.s
+
+.PHONY : sapitrello.s
+
+# target to generate assembly for a file
+sapitrello.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projekt_1.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\projekt_1.dir\sapitrello.c.s
+.PHONY : sapitrello.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -166,6 +193,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... sapitrello.obj
+	@echo ... sapitrello.i
+	@echo ... sapitrello.s
 .PHONY : help
 
 

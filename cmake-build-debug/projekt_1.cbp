@@ -87,6 +87,12 @@
 		<Unit filename="C:/Users/Hunor/CLionProjects/projekt_1/main.c">
 			<Option target="projekt_1"/>
 		</Unit>
+		<Unit filename="C:/Users/Hunor/CLionProjects/projekt_1/sapitrello.c">
+			<Option target="projekt_1"/>
+		</Unit>
+		<Unit filename="C:/Users/Hunor/CLionProjects/projekt_1/sapitrello.h">
+			<Option target="projekt_1"/>
+		</Unit>
 		<Unit filename="C:/Users/Hunor/CLionProjects/projekt_1/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
