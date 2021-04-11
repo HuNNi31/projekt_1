@@ -5,8 +5,9 @@
 int main() {
     SapiTrello *st;
     st = CreateSapiTrello();
+    PrintMenu();
     while (1) {
-        PrintMenu();
+
         int choice;
         printf("Choose: ");
         scanf("%i", &choice);
@@ -31,7 +32,35 @@ int main() {
                 break;
             case 7:
                 stAddUserToBoard(st);
-                PrintBoard(&st->boardList[0]);
+                PrintUsersBoard(&st->boardList[0]);
+                break;
+            case 8:
+                stAddUserToCard(st);
+                PrintCard(&st->cardList[0]);
+                break;
+            case 9:
+                stAddCardToBoard(st);
+                printAllCardsInBoard(&st->boardList[0]);
+                break;
+            case 10:
+                stPrintUsersOnBoard(st);
+
+                break;
+            case 11:
+                stPrintCardsOnBoard(st);
+
+                break;
+            case 12:
+                stCardsByStatusOnBoard(st);
+
+                break;
+            case 13:
+                stSetCardStatusOnBoard(st);
+
+                break;
+            case 14:
+                stGetUserHistoryOfCardByTitle(st);
+                PrintCard(st->cardList[0].userHistoryList);
                 break;
         }
     }

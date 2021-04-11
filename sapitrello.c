@@ -2,7 +2,7 @@
 // Created by Hunor on 10/04/2021.
 //
 #define MAX 65
-
+#define _CRT_SECURE_NO_WARNINGS
 #include "string.h"
 
 #include "sapitrello.h"
@@ -60,13 +60,14 @@ void PrintUser(User *user) {
     printf("User: %s %d\n", user->name, user->id);
 }
 
-void PrintBoard(Board *board) {
+void PrintUsersBoard(Board *board) {
     printf("BoardName: %s\n", board->name);
     for (int i = 0; i < board->userListSize; ++i) {
         PrintUser(&board->userList[i]);
     }
 
 }
+
 
 Card *CreateCard() {
     Card *ref = (Card *) malloc(sizeof(Card));
@@ -201,11 +202,12 @@ void stCreateUser(SapiTrello *sapiTrello ){
     User *user = CreateUser();
     sapiTrello->userList[sapiTrello->userListSize] = *user;
     sapiTrello->userListSize++;
+    PrintUser(user);
 }
 
 void getBoards(SapiTrello *sapiTrello ){
     for (int i=0; i<sapiTrello->boardListSize;++i){
-        PrintBoard(&sapiTrello->boardList[i]);
+        PrintUsersBoard(&sapiTrello->boardList[i]);
     }
 }void getUsers(SapiTrello *sapiTrello ){
     for (int i=0; i<sapiTrello->userListSize;++i){
@@ -238,6 +240,122 @@ void stAddUserToBoard(SapiTrello *sapiTrello){
     }
     AddUser(board,user);
 }
+
+void stAddUserToCard(SapiTrello *sapiTrello){
+    int id;
+    char name[200];
+    User *user;
+    Card *card;
+    printf("Enter id of the user to add:\n");
+    scanf("%d",&id);
+    printf("Enter Card name where to add user:\n");
+    scanf("%s",&name);
+    for (int i = 0; i < sapiTrello->userListSize; ++i) {
+        if (id == sapiTrello->userList[i].id) {
+            user = &sapiTrello->userList[i];
+        }
+    }
+    for (int i = 0; i < sapiTrello->cardListSize; ++i) {
+        if (strcmp(name, sapiTrello->cardList[i].title)==0) {
+            card = &sapiTrello->cardList[i];
+        }
+    }
+    AddUserToCard(card,user);
+}
+void stAddCardToBoard(SapiTrello *sapiTrello){
+
+    char boardName[200];
+    char cardName[200];
+    Board *board;
+    Card *card;
+    printf("Enter name of the card to add:\n");
+    scanf("%s",&cardName);
+    printf("Enter Board name where to add card:\n");
+    scanf("%s",&boardName);
+    for (int i = 0; i < sapiTrello->cardListSize; ++i) {
+        if (strcmp(cardName, sapiTrello->cardList[i].title)==0) {
+            card = &sapiTrello->cardList[i];
+        }
+    }
+    for (int i = 0; i < sapiTrello->boardListSize; ++i) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+            board = &sapiTrello->boardList[i];
+        }
+    }
+    AddCard(board,card);
+}
+
+void stPrintUsersOnBoard(SapiTrello *sapiTrello) {
+    Board *board;
+    char boardName[200];
+    printf("Enter name of the Board to print:\n");
+    scanf("%s",&boardName);
+    //printf("BoardName: %s\n", sapiTrello.name);
+    for (int i = 0; i < sapiTrello->boardListSize; ++i) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+            board = &sapiTrello->boardList[i];
+        }
+    }
+    PrintUsersBoard(board);
+}
+void stPrintCardsOnBoard(SapiTrello *sapiTrello) {
+    Board *board;
+    char boardName[200];
+    printf("Enter name of the Board to print the cards:\n");
+    scanf("%s",&boardName);
+    //printf("BoardName: %s\n", sapiTrello.name);
+    for (int i = 0; i < sapiTrello->boardListSize; ++i) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+            board = &sapiTrello->boardList[i];
+        }
+    }
+    printAllCardsInBoard(board);
+}
+
+void stCardsByStatusOnBoard(SapiTrello *sapiTrello) {
+    Board *board;
+    char boardName[200];
+    printf("Enter name of the Board to print the cards:\n");
+    scanf("%s",&boardName);
+    //printf("BoardName: %s\n", sapiTrello.name);
+    for (int i = 0; i < sapiTrello->boardListSize; ++i) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+            board = &sapiTrello->boardList[i];
+        }
+    }
+    getAnyStatusCard(board);
+}
+
+void stSetCardStatusOnBoard(SapiTrello *sapiTrello) {
+    Board *board;
+    char boardName[200];
+    printf("Enter name of the Board to print the cards:\n");
+    scanf("%s",&boardName);
+    //printf("BoardName: %s\n", sapiTrello.name);
+    for (int i = 0; i < sapiTrello->boardListSize; ++i) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+            board = &sapiTrello->boardList[i];
+        }
+    }
+    setCardStatusByCardTitle(board);
+}
+void stGetUserHistoryOfCardByTitle(SapiTrello *sapiTrello) {
+    Board *board;
+    char boardName[200];
+    printf("Enter name of the Board to print the card's History :\n");
+    scanf("%s",&boardName);
+    //printf("BoardName: %s\n", sapiTrello.name);
+    for (int i = 0; i < sapiTrello->boardListSize; ++i) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+            board = &sapiTrello->boardList[i];
+        }
+    }
+    getUserHistoryOfCardByTitle(board);
+}
+//void stSetCardStatusOnBoard(SapiTrello *sapiTrello) {
+//    SearchByBoard(sapiTrello);
+//    setCardStatusByCardTitle(board);
+//}
 void PrintMenu() {
 
     printf("You've got many choices young one, enter the number\n");
@@ -248,16 +366,18 @@ void PrintMenu() {
     printf("5......Get Users\n");
     printf("6......Get Cards\n");
     printf("7......Add User To Board\n");
-    printf("8......Add Card to Board\n");
-    printf("9......Add User To Card\n");
-    printf("10......Print Board\n");
-    printf("10......Print User\n");
-    printf("11......Print Card\n");
-    printf("12.....Print All Cards in Board\n");
-    printf("13.....Get User History Of Card By Title\n");
-    printf("14.....Get Status Of Card By Title\n");
-    printf("15.....Get any status of card\n");
-    printf("16.....Set Card Status By Card Title\n");
+    printf("8......Add User To Card\n");
+    printf("9......Add Card To Board\n");
+    printf("10.....Print Users on Board\n");
+    printf("11.....Print All Cards on Board\n");
+    printf("12.....Search card by Status on Board\n");
+    printf("13.....Set Card Status on Board\n");
+    printf("14.....**Search User History of card on Board\n");
+
+//    printf("13.....Get User History Of Card By Title\n");
+//    printf("14.....Get Status Of Card By Title\n");
+//    printf("15.....Get any status of card\n");
+//    printf("16.....Set Card Status By Card Title\n");
 
 
 }

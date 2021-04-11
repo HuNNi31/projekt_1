@@ -42,6 +42,7 @@ typedef struct SapiTrello {
 
 } SapiTrello;
 
+//Constructors
 SapiTrello *CreateSapiTrello();
 
 Board *CreateBoard();
@@ -49,22 +50,21 @@ Board *CreateBoard();
 User *CreateUser();
 
 Card *CreateCard();
-
+//Add functions
 void AddUser(Board *board, User *user);
 
 void AddCard(Board *board, Card *card);
 
 void AddUserToCard(Card *card, User *user);
-
-void PrintBoard(Board *board);
+//Print functions
+void PrintUsersBoard(Board *board);
 
 void PrintUser(User *user);
 
 void PrintCard(Card *card);
 
 void printAllCardsInBoard(Board *board);
-
-
+//GET/SET
 void getAnyStatusCard(Board *board);
 
 void getStatusOfCardByTitle(Board *board);
@@ -73,6 +73,8 @@ void getUserHistoryOfCardByTitle(Board *board);
 
 void setCardStatusByCardTitle(Board *board);
 
+
+//Menufication
 void stCreateBoard(SapiTrello *sapiTrello);
 
 void stCreateCard(SapiTrello *sapiTrello);
@@ -84,7 +86,23 @@ void getBoards(SapiTrello *sapiTrello);
 void getUsers(SapiTrello *sapiTrello);
 
 void getCards(SapiTrello *sapiTrello);
+
 void stAddUserToBoard(SapiTrello *sapiTrello);
+
+void stAddUserToCard(SapiTrello *sapiTrello);
+
+void stAddCardToBoard(SapiTrello *sapiTrello);
+
+void stPrintUsersOnBoard(SapiTrello *sapiTrello);
+
+void stPrintCardsOnBoard(SapiTrello *sapiTrello);
+
+void stCardsByStatusOnBoard(SapiTrello *sapiTrello);
+
+void stSetCardStatusOnBoard(SapiTrello *sapiTrello);
+void stGetUserHistoryOfCardByTitle(SapiTrello *sapiTrello);
+void SearchByBoard(SapiTrello *sapiTrello);
+
 void PrintMenu();
 
 #endif //PROJEKT_1_SAPITRELLO_H
