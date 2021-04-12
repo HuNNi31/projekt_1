@@ -3,6 +3,7 @@
 //
 #define MAX 65
 #define _CRT_SECURE_NO_WARNINGS
+
 #include "string.h"
 
 #include "sapitrello.h"
@@ -11,7 +12,7 @@
 #include <stdio.h>
 
 //ctrl + shift +u = kicsi size;
-SapiTrello *CreateSapiTrello(){
+SapiTrello *CreateSapiTrello() {
     SapiTrello *ref = (SapiTrello *) malloc(sizeof(SapiTrello));
     ref->userListSize = 0;
     ref->cardListSize = 0;
@@ -100,10 +101,11 @@ void PrintCard(Card *card) {
     } else {
         printf("Assigned user %s\n", card->assignedUser.name);
     }
-    printf("Assigned user history(%d): \n", card->userHistoryListSize);
+    printf("Assigned user history(%d):\n", card->userHistoryListSize);
     for (int i = 0; i < card->userHistoryListSize; i++) {
         PrintUser(&card->userHistoryList[i]);
     }
+    printf("\n");
 }
 
 //Card to Board
@@ -188,124 +190,132 @@ void setCardStatusByCardTitle(Board *board) {
     }
 }
 
-void stCreateBoard(SapiTrello *sapiTrello ){
+void stCreateBoard(SapiTrello *sapiTrello) {
     Board *board = CreateBoard();
     sapiTrello->boardList[sapiTrello->boardListSize] = *board;
     sapiTrello->boardListSize++;
 }
-void stCreateCard(SapiTrello *sapiTrello ){
+
+void stCreateCard(SapiTrello *sapiTrello) {
     Card *card = CreateCard();
     sapiTrello->cardList[sapiTrello->cardListSize] = *card;
     sapiTrello->cardListSize++;
 }
-void stCreateUser(SapiTrello *sapiTrello ){
+
+void stCreateUser(SapiTrello *sapiTrello) {
     User *user = CreateUser();
     sapiTrello->userList[sapiTrello->userListSize] = *user;
     sapiTrello->userListSize++;
     PrintUser(user);
 }
 
-void getBoards(SapiTrello *sapiTrello ){
-    for (int i=0; i<sapiTrello->boardListSize;++i){
+void getBoards(SapiTrello *sapiTrello) {
+    for (int i = 0; i < sapiTrello->boardListSize; ++i) {
         PrintUsersBoard(&sapiTrello->boardList[i]);
     }
-}void getUsers(SapiTrello *sapiTrello ){
-    for (int i=0; i<sapiTrello->userListSize;++i){
+}
+
+void getUsers(SapiTrello *sapiTrello) {
+    for (int i = 0; i < sapiTrello->userListSize; ++i) {
         PrintUser(&sapiTrello->userList[i]);
     }
-}void getCards(SapiTrello *sapiTrello ){
-    for (int i=0; i<sapiTrello->cardListSize;++i){
+}
+
+void getCards(SapiTrello *sapiTrello) {
+    for (int i = 0; i < sapiTrello->cardListSize; ++i) {
         PrintCard(&sapiTrello->cardList[i]);
     }
 }
 
-void stAddUserToBoard(SapiTrello *sapiTrello){
+void stAddUserToBoard(SapiTrello *sapiTrello) {
     int id;
     char name[200];
     User *user;
     Board *board;
     printf("Enter id of the user to add:\n");
-    scanf("%d",&id);
+    scanf("%d", &id);
     printf("Enter Board name where to add user:\n");
-    scanf("%s",&name);
+    scanf("%s", &name);
     for (int i = 0; i < sapiTrello->userListSize; ++i) {
         if (id == sapiTrello->userList[i].id) {
             user = &sapiTrello->userList[i];
         }
     }
     for (int i = 0; i < sapiTrello->boardListSize; ++i) {
-        if (strcmp(name, sapiTrello->boardList[i].name)==0) {
+        if (strcmp(name, sapiTrello->boardList[i].name) == 0) {
             board = &sapiTrello->boardList[i];
         }
     }
-    AddUser(board,user);
+    AddUser(board, user);
 }
 
-void stAddUserToCard(SapiTrello *sapiTrello){
+void stAddUserToCard(SapiTrello *sapiTrello) {
     int id;
     char name[200];
     User *user;
     Card *card;
     printf("Enter id of the user to add:\n");
-    scanf("%d",&id);
+    scanf("%d", &id);
     printf("Enter Card name where to add user:\n");
-    scanf("%s",&name);
+    scanf("%s", &name);
     for (int i = 0; i < sapiTrello->userListSize; ++i) {
         if (id == sapiTrello->userList[i].id) {
             user = &sapiTrello->userList[i];
         }
     }
     for (int i = 0; i < sapiTrello->cardListSize; ++i) {
-        if (strcmp(name, sapiTrello->cardList[i].title)==0) {
+        if (strcmp(name, sapiTrello->cardList[i].title) == 0) {
             card = &sapiTrello->cardList[i];
         }
     }
-    AddUserToCard(card,user);
+    AddUserToCard(card, user);
 }
-void stAddCardToBoard(SapiTrello *sapiTrello){
+
+void stAddCardToBoard(SapiTrello *sapiTrello) {
 
     char boardName[200];
     char cardName[200];
     Board *board;
     Card *card;
     printf("Enter name of the card to add:\n");
-    scanf("%s",&cardName);
+    scanf("%s", &cardName);
     printf("Enter Board name where to add card:\n");
-    scanf("%s",&boardName);
+    scanf("%s", &boardName);
     for (int i = 0; i < sapiTrello->cardListSize; ++i) {
-        if (strcmp(cardName, sapiTrello->cardList[i].title)==0) {
+        if (strcmp(cardName, sapiTrello->cardList[i].title) == 0) {
             card = &sapiTrello->cardList[i];
         }
     }
     for (int i = 0; i < sapiTrello->boardListSize; ++i) {
-        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name) == 0) {
             board = &sapiTrello->boardList[i];
         }
     }
-    AddCard(board,card);
+    AddCard(board, card);
 }
 
 void stPrintUsersOnBoard(SapiTrello *sapiTrello) {
     Board *board;
     char boardName[200];
     printf("Enter name of the Board to print:\n");
-    scanf("%s",&boardName);
-    //printf("BoardName: %s\n", sapiTrello.name);
+    scanf("%s", &boardName);
+
     for (int i = 0; i < sapiTrello->boardListSize; ++i) {
-        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name) == 0) {
             board = &sapiTrello->boardList[i];
         }
     }
     PrintUsersBoard(board);
 }
+
 void stPrintCardsOnBoard(SapiTrello *sapiTrello) {
     Board *board;
     char boardName[200];
     printf("Enter name of the Board to print the cards:\n");
-    scanf("%s",&boardName);
-    //printf("BoardName: %s\n", sapiTrello.name);
+    scanf("%s", &boardName);
+
     for (int i = 0; i < sapiTrello->boardListSize; ++i) {
-        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name) == 0) {
             board = &sapiTrello->boardList[i];
         }
     }
@@ -316,10 +326,10 @@ void stCardsByStatusOnBoard(SapiTrello *sapiTrello) {
     Board *board;
     char boardName[200];
     printf("Enter name of the Board to print the cards:\n");
-    scanf("%s",&boardName);
-    //printf("BoardName: %s\n", sapiTrello.name);
+    scanf("%s", &boardName);
+
     for (int i = 0; i < sapiTrello->boardListSize; ++i) {
-        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name) == 0) {
             board = &sapiTrello->boardList[i];
         }
     }
@@ -330,28 +340,53 @@ void stSetCardStatusOnBoard(SapiTrello *sapiTrello) {
     Board *board;
     char boardName[200];
     printf("Enter name of the Board to print the cards:\n");
-    scanf("%s",&boardName);
-    //printf("BoardName: %s\n", sapiTrello.name);
+    scanf("%s", &boardName);
+
     for (int i = 0; i < sapiTrello->boardListSize; ++i) {
-        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name) == 0) {
             board = &sapiTrello->boardList[i];
         }
     }
     setCardStatusByCardTitle(board);
 }
+
 void stGetUserHistoryOfCardByTitle(SapiTrello *sapiTrello) {
     Board *board;
     char boardName[200];
     printf("Enter name of the Board to print the card's History :\n");
-    scanf("%s",&boardName);
-    //printf("BoardName: %s\n", sapiTrello.name);
+    scanf("%s", &boardName);
+
     for (int i = 0; i < sapiTrello->boardListSize; ++i) {
-        if (strcmp(boardName, sapiTrello->boardList[i].name)==0) {
+        if (strcmp(boardName, sapiTrello->boardList[i].name) == 0) {
             board = &sapiTrello->boardList[i];
         }
     }
     getUserHistoryOfCardByTitle(board);
 }
+
+void stDeleteCard(SapiTrello *sapiTrello) {
+    Card *card, *temp;
+    char cardName[200];
+    int index = -1;
+    printf("Enter Title of the Card to delete :\n");
+    scanf("%s", &cardName);
+
+    for (int i = 0; i < sapiTrello->cardListSize; ++i) {
+        if (strcmp(cardName, sapiTrello->cardList[i].title) == 0) {
+            card = &sapiTrello->cardList[i];
+            //free(card);
+            for (int j = i; j < sapiTrello->cardListSize; ++j) {
+                sapiTrello->cardList[j] = sapiTrello->cardList[j + 1];
+
+                //free(card);
+            }
+            sapiTrello->cardListSize--;
+        }
+    }
+
+
+}
+
 //void stSetCardStatusOnBoard(SapiTrello *sapiTrello) {
 //    SearchByBoard(sapiTrello);
 //    setCardStatusByCardTitle(board);
@@ -373,6 +408,7 @@ void PrintMenu() {
     printf("12.....Search card by Status on Board\n");
     printf("13.....Set Card Status on Board\n");
     printf("14.....**Search User History of card on Board\n");
+    printf("15.....Delete Card\n");
 
 //    printf("13.....Get User History Of Card By Title\n");
 //    printf("14.....Get Status Of Card By Title\n");

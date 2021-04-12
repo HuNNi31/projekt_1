@@ -102,7 +102,7 @@ void stCardsByStatusOnBoard(SapiTrello *sapiTrello);
 void stSetCardStatusOnBoard(SapiTrello *sapiTrello);
 void stGetUserHistoryOfCardByTitle(SapiTrello *sapiTrello);
 void SearchByBoard(SapiTrello *sapiTrello);
-
+void stDeleteCard(SapiTrello *sapiTrello);
 void PrintMenu();
 
 #endif //PROJEKT_1_SAPITRELLO_H

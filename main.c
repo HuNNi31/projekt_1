@@ -9,7 +9,7 @@ int main() {
     while (1) {
 
         int choice;
-        printf("Choose: ");
+        printf("Choose:");
         scanf("%i", &choice);
         switch (choice) {
             case 1:
@@ -61,6 +61,10 @@ int main() {
             case 14:
                 stGetUserHistoryOfCardByTitle(st);
                 PrintCard(st->cardList[0].userHistoryList);
+                break;
+            case 15:
+                stDeleteCard(st);
+
                 break;
         }
     }
