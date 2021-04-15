@@ -50,12 +50,14 @@ Board *CreateBoard();
 User *CreateUser();
 
 Card *CreateCard();
+
 //Add functions
 void AddUser(Board *board, User *user);
 
 void AddCard(Board *board, Card *card);
 
 void AddUserToCard(Card *card, User *user);
+
 //Print functions
 void PrintUsersBoard(Board *board);
 
@@ -64,6 +66,7 @@ void PrintUser(User *user);
 void PrintCard(Card *card);
 
 void printAllCardsInBoard(Board *board);
+
 //GET/SET
 void getAnyStatusCard(Board *board);
 
@@ -100,9 +103,11 @@ void stPrintCardsOnBoard(SapiTrello *sapiTrello);
 void stCardsByStatusOnBoard(SapiTrello *sapiTrello);
 
 void stSetCardStatusOnBoard(SapiTrello *sapiTrello);
+
 void stGetUserHistoryOfCardByTitle(SapiTrello *sapiTrello);
-void SearchByBoard(SapiTrello *sapiTrello);
+
 void stDeleteCard(SapiTrello *sapiTrello);
+
 void PrintMenu();
 
 #endif //PROJEKT_1_SAPITRELLO_H

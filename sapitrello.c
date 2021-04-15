@@ -383,15 +383,11 @@ void stDeleteCard(SapiTrello *sapiTrello) {
             sapiTrello->cardListSize--;
         }
     }
-
-
 }
 
-//void stSetCardStatusOnBoard(SapiTrello *sapiTrello) {
-//    SearchByBoard(sapiTrello);
-//    setCardStatusByCardTitle(board);
-//}
 void PrintMenu() {
+    SapiTrello *st;
+    st = CreateSapiTrello();
 
     printf("You've got many choices young one, enter the number\n");
     printf("1......Create Board\n");
@@ -407,9 +403,66 @@ void PrintMenu() {
     printf("11.....Print All Cards on Board\n");
     printf("12.....Search card by Status on Board\n");
     printf("13.....Set Card Status on Board\n");
-    printf("14.....**Search User History of card on Board\n");
-    printf("15.....Delete Card\n");
+    printf("14.....Delete Card\n");
 
+    while (1) {
+
+        int choice;
+        printf("Choose:");
+        scanf("%i", &choice);
+        switch (choice) {
+            case 1:
+                stCreateBoard(st);
+                break;
+            case 2:
+                stCreateUser(st);
+                break;
+            case 3:
+                stCreateCard(st);
+                break;
+            case 4:
+                getBoards(st);
+                break;
+            case 5:
+                getUsers(st);
+                break;
+            case 6:
+                getCards(st);
+                break;
+            case 7:
+                stAddUserToBoard(st);
+                PrintUsersBoard(&st->boardList[0]);
+                break;
+            case 8:
+                stAddUserToCard(st);
+                PrintCard(&st->cardList[0]);
+                break;
+            case 9:
+                stAddCardToBoard(st);
+                printAllCardsInBoard(&st->boardList[0]);
+                break;
+            case 10:
+                stPrintUsersOnBoard(st);
+
+                break;
+            case 11:
+                stPrintCardsOnBoard(st);
+
+                break;
+            case 12:
+                stCardsByStatusOnBoard(st);
+
+                break;
+            case 13:
+                stSetCardStatusOnBoard(st);
+
+                break;
+            case 14:
+                stDeleteCard(st);
+
+                break;
+        }
+    }
 //    printf("13.....Get User History Of Card By Title\n");
 //    printf("14.....Get Status Of Card By Title\n");
 //    printf("15.....Get any status of card\n");
